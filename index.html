@@ -1,0 +1,45 @@
+<link rel="stylesheet" href="style.css">
+<script src="https://unpkg.com/vue"></script>
+
+<div id="app">
+    <div class="display">
+        <div class="info">
+            <h1 class="name">{{ player.label }}</h1>
+            <div class="hpbar">
+                <section class="hptotal" 
+                    :style="{width:player.hp + '%', backgroundColor: player.hp > 20 ? 'green' : 'red'}">
+                    </section>
+            </div>
+            <p>{{ player.hp }}%</p>
+        </div>
+        <div class="info">
+            <h1 class="name">{{ monster.label }}</h1>
+            <div class="hpbar">
+                <section class="hptotal" 
+                    :style="{width:monster.hp + '%', backgroundColor: monster.hp > 20 ? 'green' : 'red'}">
+                    </section>
+            </div>
+            <p>{{ monster.hp }}%</p>
+        </div>
+    </div>
+    <div class="actions">
+        <template v-if="showActions">
+            <button class="btt atk" @click="attack()">Attack</button>
+            <button class="btt special" @click="special()">Special</button>
+            <button class="btt heal" @click="heal()">Heal</button>
+            <button class="btt surrender" @click="surrender()">Surrender</button>
+        </template>
+        <template v-else>
+            <button class="btt new-game"  @click="newGame()">New game</button>
+        </template>
+    </div>
+    <div class="log" v-if="log.length != 0">
+        <ul>
+            <li v-for="info in log" 
+                :style="{backgroundColor: info.includes('player', 5) ? 'firebrick' : 'steelblue'}">
+                {{ info }}</li>
+        </ul>
+    </div>
+</div>
+
+<script src="app.js"></script>
